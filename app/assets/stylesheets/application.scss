@@ -11,3 +11,36 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+.global-container {
+  display: flex;
+}
+
+.toolbar {
+  height: calc(100vh - 75px);
+  position: sticky;
+  top: 70px;
+  background-color: #3b3c3c;
+  width: 300px;
+  color: $yellow;
+}
+
+
+.global-content {
+  flex-grow: 1;
+  background-color: $light-gray;
+  min-height: 100vh;
+}
+
+.border-yellow {
+  border: solid $yellow 3px;
+  box-shadow: 2px 2px 10px grey;
+}
+
+.border-black {
+  border: solid black 3px;
+}
+
+.bg-white {
+  background: white;
+}

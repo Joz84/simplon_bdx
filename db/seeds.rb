@@ -1,7 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Batch.destroy_all
+
+# Batch.create!(name: "batch1", start_date: Date.today)
+
+
+batches = Batch.all #.where(start_date < Date.today - 6.weeks)
+batches.each do |batch|
+  user_id_couples = batch.users.map(&:id).shuffle.each_slice(2).to_a
+  user_id_couples.each do |user_id_couple|
+    pair = Pair.create(date: Date.today)
+    PairUser.create(pair: pair, user_id: user_id_couple.first )
+    PairUser.create(pair: pair, user_id: user_id_couple.second )
+  end
+end

@@ -1,2 +1,58 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(250, 209, 49,0.4) 0%, rgba(250, 209, 49,0.2) 50%), url(<%= @animal_url %>);">
+  <%= cl_image_tag current_user.avatar, class: "avatar-bordered banner-avatar" %>
+</div>
+
+<div class="global-container">
+  <div class="toolbar">
+    <div class="text-center mt-3">
+      <p>Partenaire du Jour</p>
+      <%= cl_image_tag @partner.avatar, class: "avatar-bordered avatar-large banner-avatar border-yellow" %>
+      <h4><%= @partner.name %></h4>
+    </div>
+    <div class="text-center mt-3">
+      <p>Météo du jour</p>
+      <% if current_user.feeling.present? %>
+        <%= image_tag "emojis/#{current_user.feeling.rating}.png", class: "avatar-bordered avatar-large banner-avatar border-yellow" %>
+          <h4><%= current_user.feeling.rating %></h4>
+      <% else %>
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#weatherModal">
+          Choisir
+        </button>
+      <% end %>
+
+    </div>
+  </div>
+  <div class="global-content">
+    <div class="container mt-5 p-5">
+      <h1>Le sujet du jour</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic necessitatibus mollitia esse cupiditate corporis expedita adipisci deserunt impedit, natus velit nostrum at architecto laudantium eius, odio sit, tempora facilis eveniet!</p>
+    </div>
+  </div>
+</div>
+
+
+
+<% if current_user.feeling.nil? %>
+  <!-- Modal -->
+  <div class="modal fade" id="weatherModal" tabindex="-1" role="dialog" aria-labelledby="weatherModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="weatherModalLabel">Choisi la météo du jour</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for Feeling.new do |f| %>
+            <%= f.input :rating, collection: Feeling.ratings, as: :radio_buttons %>
+        </div>
+        <div class="modal-footer">
+            <%= f.submit "Enregistrer", class: "btn btn-warning" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

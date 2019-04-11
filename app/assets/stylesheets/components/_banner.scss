@@ -1,0 +1,12 @@
+.banner {
+  height: 50vh;
+  background-position: center;
+  background-size: cover;
+  border-bottom: $yellow 5px solid;
+  position: relative;
+  .banner-avatar {
+    position: absolute;
+    bottom: -80px;
+    right: 50px;
+  }
+}
