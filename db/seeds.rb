@@ -12,3 +12,4 @@ batches.each do |batch|
     PairUser.create(pair: pair, user_id: user_id_couple.second )
   end
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
